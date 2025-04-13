@@ -69,9 +69,9 @@ class RestClient:
         return rest_response
         
         
-        @staticmethod
-        def _get_json(rest_response):
-            try:
-                return rest_response.json()
-            except JSONDecodeError:
-                return {}
+    @staticmethod
+    def _get_json(rest_response):
+        try:
+            return rest_response.json()
+        except JSONDecodeError:
+            return {}
