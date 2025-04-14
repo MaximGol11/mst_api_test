@@ -1,22 +1,30 @@
-from api_mst.models.email_register.registration_form import (
-    RegistrationForm,
-    PlainPassword,
-)
-import faker
 
 
-def test_post_v2_register_json(user_api):
-    email = faker.Faker().email()
-    password = "qweasd"
-    
-    registration_form = RegistrationForm(
+def test_post_v2_register_json_positive(user_api_helper ,prepare_user_faker):
+    email = prepare_user_faker.email
+    password = prepare_user_faker.password
+
+    user_api_helper.register_user_by_email(
         email=email,
-        plain_password=PlainPassword(first=password, second=password),
+        password=password,
         currency_id=55,
         country=245,
-        oferta_agreement=1,
-        first_refill_bonus_type_choice="casino",
+        bonus="casino",
     )
-    
-    response = user_api.post_api_v2_register_json(registration_form)
+    response = user_api_helper.get_user_profile()
+    assert response.email == email
     print(response)
+
+
+
+def test_post_v2_register_json_negative(user_api_helper):
+    response = user_api_helper.register_user_by_email(
+        email="test1234@test.com",
+        password="qweasd",
+        currency_id=55,
+        country=245,
+        bonus="casino",
+        positive_response=False
+    )
+
+    assert response.errors.error_codes[0] == "username_already_used"
