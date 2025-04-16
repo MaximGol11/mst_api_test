@@ -1,6 +1,38 @@
 from typing import List, Dict
 from pydantic import BaseModel, Field
 
+"""
+{
+    "status": "error",
+    "errors": {
+        "error_codes": [
+            "username_already_used"
+        ],
+        "form_errors": [
+            "Это значение уже используется.",
+            "Логин уже используется"
+        ],
+        "email": [
+            "Email уже используется"
+        ],
+        "username": [],
+        "plainPassword": [],
+        "firstName": [],
+        "lastName": [],
+        "nickname": [],
+        "currencyId": [],
+        "phoneNumber": [],
+        "country": [],
+        "region": [],
+        "city": [],
+        "phonePrefix": [],
+        "registration_method": [],
+        "promo": [],
+        "oferta_agreement": []
+    }
+}
+"""
+
 
 class ErrorDetails(BaseModel):
     error_codes: List[str]

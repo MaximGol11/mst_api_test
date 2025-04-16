@@ -2,6 +2,18 @@ from pydantic import BaseModel, Field
 from typing import Optional
 
 
+"""
+fos_user_registration_form[email]: asdasdasd@asdasd.fgj
+fos_user_registration_form[plainPassword][first]: qweasd
+fos_user_registration_form[plainPassword][second]: qweasd
+fos_user_registration_form[currencyId]: 21
+fos_user_registration_form[country]: 81
+fos_user_registration_form[oferta_agreement]: 1
+first_refill_bonus_type_choice: casino
+promo_code:
+"""
+
+
 class PlainPassword(BaseModel):
     first: str
     second: str
