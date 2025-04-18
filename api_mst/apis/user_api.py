@@ -4,6 +4,9 @@ from api_mst.models.phone_register.phone_registration_form import PhoneRegistrat
 from api_mst.models.phone_register.registration_by_phone_number_response import RegistrationByPhoneNumberResponse
 from api_mst.models.email_register.register_by_email_successful_response import RegisterResponse
 from api_mst.models.email_register.register_by_email_erroneous_response import ErrorResponse
+from api_mst.models.one_click_register.one_click_register_form import OneClickRegisterForm
+from api_mst.models.one_click_register.registration_by_one_click_response import RegistrationByOneClickResponse
+from api_mst.models.one_click_register.get_password_one_click_response import GetPasswordOneClickResponse
 from api_mst.models.user_profile import UserProfile
 
 
@@ -59,6 +62,48 @@ class UserApi(RestClient):
             return RegistrationByPhoneNumberResponse(**response.json())
         else:
             return ErrorResponse(**response.json())
+
+
+    def post_api_v1_registration_one_click(
+        self,
+        one_click_register_form: OneClickRegisterForm,
+        positive_response: bool = True,
+        **kwargs
+    ):
+        """
+        Регистрация пользователя в один клик.
+
+        """
+        response = self.post(
+            path="api/v1/registration/one_click",
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            data=one_click_register_form.to_form(),
+            **kwargs
+        )
+        return RegistrationByOneClickResponse(**response.json())
+
+
+    def get_api_v1_registration_one_click_get_password_json(self,
+        **kwargs
+    ):
+        """
+        Получение логина и пароля пользователя после регистрации в один клик.
+
+        """
+        response = self.get(
+            path="/api/v1/registration/one_click/get_password.json",
+            **kwargs
+        )
+        return GetPasswordOneClickResponse(**response.json())
+
+
+
+    def get_api_v1_user_status_get_11898(self):
+        pass
+
+
+    def get_api_v1_finance_refill_method_form(self):
+        pass
 
 
     def get_api_v1_user_json(

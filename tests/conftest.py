@@ -23,6 +23,7 @@ def user_api():
     user = UserApi(user_api_conf)
     return user
 
+
 @pytest.fixture
 def user_api_helper(user_api):
     return UserApiHelper(user_api)
