@@ -23,6 +23,7 @@ def user_api():
     user = UserApi(user_api_conf)
     return user
 
+
 @pytest.fixture
 def user_api_helper(user_api):
     return UserApiHelper(user_api)
@@ -32,7 +33,10 @@ def user_api_helper(user_api):
 def prepare_user_faker():
     password = Faker().password()
     email = Faker().email()
+    phone_number = f"421{Faker().numerify('#########')}"         # пока генерирует только для одной страны, возможно в будующем сделаю генератор под разные страны
 
-    User = namedtuple("User", ["password", "email"])
-    user = User(password, email)
+    User = namedtuple("User", ["password", "email", "phone_number"])
+    user = User(password, email, phone_number)
     return user
+
+
