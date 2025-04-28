@@ -8,10 +8,13 @@ from api_mst.models.one_click_register.one_click_register_form import OneClickRe
 from api_mst.models.one_click_register.registration_by_one_click_response import RegistrationByOneClickResponse
 from api_mst.models.one_click_register.get_password_one_click_response import GetPasswordOneClickResponse
 from api_mst.models.user_profile import UserProfile
+from api_mst.models.login_form import LoginForm
+import allure
 
 
 class UserApi(RestClient):
 
+    @allure.step("Регистрация нового пользователя по email")
     def post_api_v2_register_json(
         self,
         email_registration_form: RegistrationForm,
@@ -41,6 +44,7 @@ class UserApi(RestClient):
             return ErrorResponse(**response.json())
 
 
+    @allure.step("Регистрация нового пользователя по номеру телефона с паролем")
     def post_api_v3_register_mobile_json(
         self,
         phone_registration_form: PhoneRegistrationForm,
@@ -52,7 +56,7 @@ class UserApi(RestClient):
 
         """
         response = self.post(
-            path="/api/v3/register/mobile.json",
+            path="/api/v3/register-mobile.json",
             headers={"Content-Type": "application/x-www-form-urlencoded"},
             data=phone_registration_form.to_form(),
             **kwargs
@@ -61,9 +65,11 @@ class UserApi(RestClient):
         if positive_response:
             return RegistrationByPhoneNumberResponse(**response.json())
         else:
+            response.raise_for_status()
             return ErrorResponse(**response.json())
 
 
+    @allure.step("Регистрация нового пользователя в 1 клик")
     def post_api_v1_registration_one_click(
         self,
         one_click_register_form: OneClickRegisterForm,
@@ -75,7 +81,7 @@ class UserApi(RestClient):
 
         """
         response = self.post(
-            path="api/v1/registration/one_click",
+            path="/api/v1/registration/one_click",
             headers={"Content-Type": "application/x-www-form-urlencoded"},
             data=one_click_register_form.to_form(),
             **kwargs
@@ -83,6 +89,7 @@ class UserApi(RestClient):
         return RegistrationByOneClickResponse(**response.json())
 
 
+    @allure.step("Получение логина и пароля после регистрации в 1 клик")
     def get_api_v1_registration_one_click_get_password_json(self,
         **kwargs
     ):
@@ -106,6 +113,7 @@ class UserApi(RestClient):
         pass
 
 
+    @allure.step("Получение дааных о пользователе")
     def get_api_v1_user_json(
         self,
         **kwargs
@@ -125,42 +133,23 @@ class UserApi(RestClient):
         return UserProfile(**response.json())
 
 
+    @allure.step("Авторизация пользователя")
     def post_api_login_check(
         self,
-        auth_type: str,
-        password: str,
-        email: str = None,
-        phone_number: str = None,
+        login_form = LoginForm,
         **kwargs
     ):
         """
-        Авторизация пользователя..
-
-        Args:
-            email: Email пользователя.
-            password: Пароль пользователя.
-            phone_number: Номер телефона пользователя.
-            **kwargs: Дополнительные параметры запроса.
+        Авторизация пользователя.
 
         Returns:
             Получаем ответ успешная ли проверка и токен.
         """
 
-        if auth_type == "email":
-            response = self.post(
-                path="/api/login/check",
-                headers={"Content-Type": "application/x-www-form-urlencoded"},
-                data={"_username": email, "_password": password, "phone_number": phone_number},
-                **kwargs
-            )
-        elif auth_type == "phone":
-            response = self.post(
-                path="/api/login/check",
-                headers={"Content-Type": "application/x-www-form-urlencoded"},
-                data={"_username": phone_number, "_password": password},
-                **kwargs
-            )
-        else:
-            return {}
+        response = self.post(
+            path="/api/login_check",
+            json=login_form.model_dump(exclude_none=True, by_alias=True),
+            **kwargs
+        )
 
         return response.json()

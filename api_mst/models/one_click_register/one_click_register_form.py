@@ -8,11 +8,6 @@ from pydantic import BaseModel, Field
 	"first_refill_bonus_type_choice": "casino"
 """
 
-class PlainPassword(BaseModel):
-    first: str
-    second: str
-
-
 class OneClickRegisterForm(BaseModel):
     currency_id: int = Field(..., serialization_alias="fos_user_registration_form[currencyId]")
     country: int = Field(..., serialization_alias="fos_user_registration_form[countryId]")

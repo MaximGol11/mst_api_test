@@ -182,7 +182,7 @@ class UserVirtualStatusEnum(str, Enum):
 
 class RegistrationMethodEnum(str, Enum):
     full = "full"
-    quick = "quick"
+    quick = "mobile"
 
 
 class KycStatusEnum(str, Enum):
@@ -194,7 +194,7 @@ class KycStatusEnum(str, Enum):
 # --- Подмодели --- #
 
 class StatusValue(BaseModel):
-    value: str
+    value: Optional[str]
 
 
 class Country(BaseModel):
@@ -233,7 +233,7 @@ class UserProfileData(BaseModel):
 class UserProfile(BaseModel):
     id: int
     username: str
-    email: str
+    email: Optional[str] = Field(None)
     status_email: StatusValue
     selected_bonus_type: StatusValue
     is_full: bool
