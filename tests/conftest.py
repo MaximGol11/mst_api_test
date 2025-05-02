@@ -19,7 +19,7 @@ structlog.configure(
 
 @pytest.fixture
 def user_api():
-    user_api_conf = UserApiConf(host="https://dev48.mostbet.com", disable_log=False)
+    user_api_conf = UserApiConf(host="https://dev45.mostbet.com", disable_log=False)
     user = UserApi(user_api_conf)
     return user
 
