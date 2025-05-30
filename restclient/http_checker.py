@@ -15,7 +15,7 @@ def check_status_code_http(expected_status_code: requests.codes = requests.codes
             raise AssertionError(f"Ожидаемое сообщение должно быть равно: '{expected_message}'")
     except HTTPError as e:
         assert e.response.status_code == expected_status_code
-        #assert e.response.json()["title"] == expected_message
+        # assert e.response.json()["title"] == expected_message
 
         # TODO сделать что-то с проверкой сообщения об ошибке, либо удалить ее полностью и оставить только проверку статуса
         # возможно лучше сделать отдельно статус и отдельные чекеры проверки сообщений

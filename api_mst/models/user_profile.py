@@ -2,6 +2,7 @@ from typing import List, Optional
 from pydantic import BaseModel, Field, field_validator
 from datetime import datetime
 from enum import Enum
+from enum import StrEnum
 
 """
 {
@@ -165,27 +166,27 @@ from enum import Enum
 
 # --- ENUM'ы --- #
 
-class EmailStatusEnum(str, Enum):
+class EmailStatusEnum(StrEnum):
     confirmation_waiting = "confirmation_waiting"
     confirmed = "confirmed"
 
 
-class BonusTypeEnum(str, Enum):
+class BonusTypeEnum(StrEnum):
     casino = "casino"
     sport = "sport"
 
 
-class UserVirtualStatusEnum(str, Enum):
+class UserVirtualStatusEnum(StrEnum):
     active = "active"
     inactive = "inactive"
 
 
-class RegistrationMethodEnum(str, Enum):
+class RegistrationMethodEnum(StrEnum):
     full = "full"
     quick = "mobile"
 
 
-class KycStatusEnum(str, Enum):
+class KycStatusEnum(StrEnum):
     not_required = "not_required"
     pending = "pending"
     verified = "verified"

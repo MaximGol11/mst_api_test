@@ -16,27 +16,21 @@ class RestClient:
         self.session = session()
         self.log = structlog.get_logger(__name__).bind(service='api')
 
-
     def set_headers(self, headers):
         if headers:
             self.session.headers.update(headers)
 
-
     def get(self, path, **kwargs):
         return self._send_request(method='GET', path=path, **kwargs)
-
 
     def post(self, path, **kwargs):
         return self._send_request(method='POST', path=path, **kwargs)
 
-
     def put(self, path, **kwargs):
         return self._send_request(method='PUT', path=path, **kwargs)
 
-
     def delete(self, path, **kwargs):
         return self._send_request(method='DELETE', path=path, **kwargs)
-
 
     @allure_attach
     def _send_request(self, method, path, **kwargs):
@@ -72,7 +66,6 @@ class RestClient:
 
         rest_response.raise_for_status()
         return rest_response
-
 
     @staticmethod
     def _get_json(rest_response):

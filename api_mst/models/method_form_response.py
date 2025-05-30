@@ -1,6 +1,10 @@
-from typing import List, Optional, Union, Literal
+from typing import (
+    List,
+    Optional,
+    Union,
+    Literal,
+)
 from pydantic import BaseModel
-
 
 """
 {

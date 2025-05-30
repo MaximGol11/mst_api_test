@@ -7,6 +7,7 @@ from pydantic import BaseModel
 }
 """
 
+
 class RegistrationByOneClickResponse(BaseModel):
     success: bool
     jwt: str

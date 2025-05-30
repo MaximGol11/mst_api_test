@@ -7,6 +7,7 @@ from pydantic import BaseModel
 }
 """
 
+
 class RegistrationByOneClickErrorResponse(BaseModel):
     success: bool
     message: str

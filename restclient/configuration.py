@@ -1,10 +1,10 @@
 class Configuration:
-    
+
     def __init__(
-        self,
-        host: str,
-        headers: dict = None,
-        disable_log: bool = True,
+            self,
+            host: str,
+            headers: dict = None,
+            disable_log: bool = True,
     ):
         """
         Configuration class to hold the configuration for the REST client.

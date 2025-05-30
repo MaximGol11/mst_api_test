@@ -19,11 +19,9 @@ class TestPostApiLoginCheck:
         )
         user_api_helper.login_check(phone_number=phone_number, password=password, register_type="mobile")
 
-
     @allure.step("Негативные тесты тест проверки авторизации пользователя с номером телефона")
     def test_post_api_login_check_mobile_negative(self, ):
         pass
-
 
     @allure.step("Позитивный тест проверки авторизации пользователя с почтой")
     def test_post_api_login_check_email_positive(self, user_api_helper, prepare_user_faker):
@@ -39,12 +37,9 @@ class TestPostApiLoginCheck:
         )
         user_api_helper.login_check(email=email, password=password, register_type="email")
 
-
     @allure.step("Негативный тест проверки авторизации пользователя с почтой")
     def test_post_api_login_check_email_negative(self, ):
         pass
-
-
 
     @allure.step("Позитивный тест проверки авторизации пользователя после регистрации в 1 клик")
     def test_post_api_login_check_one_click(self, user_api_helper):

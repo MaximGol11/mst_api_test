@@ -16,10 +16,10 @@ class UserApi(RestClient):
 
     @allure.step("Регистрация нового пользователя по email")
     def post_api_v2_register_json(
-        self,
-        email_registration_form: RegistrationForm,
-        positive_response: bool = True,
-        **kwargs
+            self,
+            email_registration_form: RegistrationForm,
+            positive_response: bool = True,
+            **kwargs
     ):
         """
         Регистрация нового пользователя по email c типом регистрации full.
@@ -36,20 +36,19 @@ class UserApi(RestClient):
             headers={"Content-Type": "application/x-www-form-urlencoded"},
             data=email_registration_form.to_form(),
             **kwargs
-            )
+        )
 
         if positive_response:
             return RegisterResponse(**response.json())
         else:
             return ErrorResponse(**response.json())
 
-
     @allure.step("Регистрация нового пользователя по номеру телефона с паролем")
     def post_api_v3_register_mobile_json(
-        self,
-        phone_registration_form: PhoneRegistrationForm,
-        positive_response: bool = True,
-        **kwargs
+            self,
+            phone_registration_form: PhoneRegistrationForm,
+            positive_response: bool = True,
+            **kwargs
     ):
         """
         Регистрация пользователя по номеру телефона.
@@ -60,7 +59,7 @@ class UserApi(RestClient):
             headers={"Content-Type": "application/x-www-form-urlencoded"},
             data=phone_registration_form.to_form(),
             **kwargs
-            )
+        )
 
         if positive_response:
             return RegistrationByPhoneNumberResponse(**response.json())
@@ -68,13 +67,12 @@ class UserApi(RestClient):
             response.raise_for_status()
             return ErrorResponse(**response.json())
 
-
     @allure.step("Регистрация нового пользователя в 1 клик")
     def post_api_v1_registration_one_click(
-        self,
-        one_click_register_form: OneClickRegisterForm,
-        positive_response: bool = True,
-        **kwargs
+            self,
+            one_click_register_form: OneClickRegisterForm,
+            positive_response: bool = True,
+            **kwargs
     ):
         """
         Регистрация пользователя в один клик.
@@ -88,10 +86,10 @@ class UserApi(RestClient):
         )
         return RegistrationByOneClickResponse(**response.json())
 
-
     @allure.step("Получение логина и пароля после регистрации в 1 клик")
-    def get_api_v1_registration_one_click_get_password_json(self,
-        **kwargs
+    def get_api_v1_registration_one_click_get_password_json(
+            self,
+            **kwargs
     ):
         """
         Получение логина и пароля пользователя после регистрации в один клик.
@@ -103,20 +101,16 @@ class UserApi(RestClient):
         )
         return GetPasswordOneClickResponse(**response.json())
 
-
-
     def get_api_v1_user_status_get_11898(self):
         pass
-
 
     def get_api_v1_finance_refill_method_form(self):
         pass
 
-
     @allure.step("Получение дааных о пользователе")
     def get_api_v1_user_json(
-        self,
-        **kwargs
+            self,
+            **kwargs
     ):
         """
         Получение информации о пользователе.
@@ -128,16 +122,15 @@ class UserApi(RestClient):
         response = self.get(
             path="/api/v1/user.json",
             **kwargs
-            )
+        )
 
         return UserProfile(**response.json())
 
-
     @allure.step("Авторизация пользователя")
     def post_api_login_check(
-        self,
-        login_form = LoginForm,
-        **kwargs
+            self,
+            login_form=LoginForm,
+            **kwargs
     ):
         """
         Авторизация пользователя.

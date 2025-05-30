@@ -11,7 +11,7 @@ structlog.configure(
         structlog.processors.JSONRenderer(
             indent=4,
             ensure_ascii=True,
-            #sort_keys=True
+            # sort_keys=True
         )
     ]
 )
@@ -33,10 +33,8 @@ def user_api_helper(user_api):
 def prepare_user_faker():
     password = Faker().password()
     email = Faker().email()
-    phone_number = f"421{Faker().numerify('#########')}"         # пока генерирует только для одной страны, возможно в будующем сделаю генератор под разные страны
+    phone_number = f"421{Faker().numerify('#########')}"  # пока генерирует только для одной страны, возможно в будующем сделаю генератор под разные страны
 
     User = namedtuple("User", ["password", "email", "phone_number"])
     user = User(password, email, phone_number)
     return user
-
-

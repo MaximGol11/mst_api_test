@@ -1,6 +1,8 @@
-from pydantic import BaseModel, Field
+from pydantic import (
+    BaseModel,
+    Field,
+)
 from typing import Optional
-
 
 """
 fos_user_registration_form[countryId]: 10129
@@ -27,7 +29,6 @@ class PhoneRegistrationForm(BaseModel):
     oferta_agreement: int = Field(..., serialization_alias="fos_user_registration_form[oferta_agreement]")
     first_refill_bonus_type_choice: str
     promo_code: Optional[str] = ""
-
 
     def to_form(self) -> dict:
         return {

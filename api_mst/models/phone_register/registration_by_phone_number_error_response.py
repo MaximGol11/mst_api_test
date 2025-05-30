@@ -7,6 +7,7 @@ from pydantic import BaseModel
 }
 """
 
+
 class RegistrationByPhoneNumberErrorResponse(BaseModel):
     success: bool
     message: str

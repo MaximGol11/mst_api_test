@@ -1,4 +1,8 @@
-from pydantic import BaseModel, Field
+from pydantic import (
+    BaseModel,
+    Field,
+)
+
 """
 {
     "_username": "category_02@test.com",
